@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wechat SDK Debugger Tool</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+
+    div {
+      border: 1px solid black;
+      margin: 10px;
+      padding: 10px;
+    }
+    input, button, textarea, button{
+      display: block;
+      margin: 4px;
+    }
+  </style>
+  </head>
+  <body>
+  <div>
+    <input type="text" name="appid" placeholder="Appid" value="wx186c10fc6a4ff63c"/>
+    <input type="text" name="app_secret" placeholder="Appsecret"value="741deef4b669efa309c76aebf2b0c9ac"/>
+    <button id="get_token">Get the token</button>
+    <textarea id="token" placeholder="Token"></textarea>
+  </div>
+  <div>
+    <button>Get the jsapi_ticket</button>
+    <textarea placeholder="jsapi_ticket"></textarea>
+  </div>
+  <div>
+    <input type="text" name="noncestr" placeholder="noncestr"/>
+    <input type="text" name="jsapi_ticket" placeholder="jsapi_ticket"/>
+    <input type="text" name="timestamp" placeholder="timestamp"/>
+    <input type="text" name="url" placeholder="url"/>
+    <button>Get the jsapi_ticket</button>
+    <textarea placeholder="signature"></textarea>
+  </div>
+  <script>
+    $('#get_token').on('click', function(){
+      var appid = $('input[name=appid]').val();
+      var app_secret = $('input[name=app_secret]').val();
+      $.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appid}&secret=${app_secret}`).done(function(res){
+        console.log('Response:', res);
+        $('#token').val('123');
+      })
+    })
+  </script>
+</body>
+</html>
